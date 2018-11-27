@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
@@ -7,36 +8,53 @@
     <link rel="stylesheet" href="/public/css/index.css">
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
+
 <body>
     <div class="row">
         <div class="control col-md-2">
             <div class="control-audio box-shadow">
                 <span class="title">语音控制台</span>
                 <audio controls autoplay></audio>
-                <input 
-                    class="audio-start btn btn-sm btn-primary"
-                    data-toggle="modal" data-target="#myModal"
-                    type="button" value="录音" 
-                />
+                <input class="audio-start btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal" type="button"
+                    value="录音" />
                 <input class="audio-sotp btn btn-sm btn-primary" onclick="stopRecording()" type="button" value="停止" />
                 <input class="btn btn-sm btn-primary" onclick="playRecording()" type="button" value="播放" />
                 <input class="btn btn-sm btn-primary" id="audio-submit" type="button" value="提交语音" />
                 <button class="shibie btn btn-success btn-sm">识别</button>
 
             </div>
-   
+
             <hr>
             <div class="control-txt box-shadow">
                 <span class="title">语音识别内容</span>
                 <h3 id="shibie-content">请录音后识别</h3>
-                <button class="btn btn-sm btn-primary">开始绘画</button>
+                颜色:<input type="color" id="tuxingcolor" value="#add8e6">
+                <button class="btn btn-sm btn-primary" id="startDrawBtn">开始绘画</button>
+            </div>
+            <hr>
+            <div class="content-tishi box-shadow">
+                <span class="title">你可以这样说:</span>
+                <li>画一个圆形</li>
+                <li>画一个正方形</li>
+                <li>画一个长方形</li>
+                <li>画一个三角形</li>
+                <li>画一个菱形</li>
+                <li>画一个圆形，半径为50</li>
+                <li>画一个正方形，边长为100</li>
+                <li>画一个长方形，长度为200，宽度为300</li>
             </div>
         </div>
         <div class="draw-place col-md-9">
-            <h3 class="title">画板</h1>
+            <div>
+                <h3 class="title">画板:1400x700</h1>
+                <button class="btn btn-sm btn-info" id="canvas-jiyi">打开画布记忆</button>
+            </div>
             <canvas id="myCanvas" width="1400" height="700"></canvas>
-            <canvas id="bgcas" width="1400" height="600"></canvas>
-        </div>        
+        </div>
+    </div>
+    <div id='clock'>
+        <canvas id="cas" width="1400" height="700"></canvas>
+        <canvas id="bgcas" width="1400" height="600"></canvas>
     </div>
 
     <script type="text/javascript" src="/public/js/HZRecorder.js"></script>
@@ -77,19 +95,33 @@
                 console.log(state)
             });
         }
-
-        $('#audio-submit').on('click', function() {
+        
+        var  canvas_jiyi = false
+        $('#audio-submit').on('click', function () {
             uploadAudio()
         })
 
-        $('.shibie').on('click', function() {
+        $('.shibie').on('click', function () {
             shibie(1)
         })
-        
-        $('.audio-start').on('click', function() {
+
+        $('.audio-start').on('click', function () {
             startRecording()
         })
+        $('#startDrawBtn').on('click', function () {
+            draw(draw_obj, canvas_jiyi)
+        })
+        $('#canvas-jiyi').on('click', function () {
+            canvas_jiyi = !canvas_jiyi
+            if (canvas_jiyi) {
+                $('#canvas-jiyi').html('关闭画布记忆')
+            } else {
+                $('#canvas-jiyi').html('打开画布记忆')
+            }
+        })
+        // initAnimate()
     </script>
 
 </body>
+
 </html>

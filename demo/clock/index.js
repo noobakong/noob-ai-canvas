@@ -11,7 +11,7 @@ var numData = [
   "1111/1001/1001/1111/0001/0001/1111", //9
   "0000/0000/0010/0000/0010/0000/0000" //:
 ]
-var canvas = document.getElementById("myCanvas"),
+var canvas = document.getElementById("cas"),
   bgcanvas = document.getElementById("bgcas"),
   ctx = canvas.getContext('2d'),
   bgctx = bgcanvas.getContext("2d");
@@ -192,3 +192,5 @@ function setTime(time) {
     }
   }
 }
+
+initAnimate()
