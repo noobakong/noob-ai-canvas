@@ -20,6 +20,9 @@ var chnNameValue = {
 }
 
 function ChineseToNumber(chnStr) {
+  if (chnStr == '') {
+    return
+  }
   var rtn = 0;
   var section = 0;
   var number = 0;
@@ -48,5 +51,3 @@ function ChineseToNumber(chnStr) {
   }
   return rtn + section;
 }
-
-console.log(ChineseToNumber('二百二十九'));
